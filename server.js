@@ -4,13 +4,12 @@ const static = require('./static/');
 const path = require('path');
 const body = require('koa-better-body');
 
-
+let server = new Koa();
 //中间件
 server.use(body({
 	uploadDir:path.resolve(__dirname,'static/upload')
 }))
 
-let server = new Koa();
 server.listen (8080)
 
 let router = new Router();
