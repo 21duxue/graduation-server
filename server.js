@@ -25,7 +25,7 @@ server.listen (8080);
 // })
 
 server.use(async ctx =>{
-	let data = await ctx.db.query("SELECT　* FROM Recommend;");
+	let data = await ctx.db.query("SELECT * FROM Recommend;");
 	ctx.body = data;
 })
 
