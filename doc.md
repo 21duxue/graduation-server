@@ -54,7 +54,7 @@ CREATE TABLE Recommend
 Rtitle VARCHAR(40) UNIQUE， /* Sname取唯一值*/ 
 Rcontent   VARCHAR(500)，
 );
-CREATE TABLE Recommend (Rid INT PRIMARY KEY,RtitleVARCHAR(40) UNIQUE,Rcontent   VARCHAR(500));
+CREATE TABLE Recommend (Rid INT PRIMARY KEY,Rtitle VARCHAR(40) UNIQUE,Rcontent   VARCHAR(500),Rts VARCHAR(40),Rpname VARCHAR(40),RseeNum INT,Rcomment VARCHAR(400) );
 ```
 
 > 查看表 ` show tables;`
@@ -64,6 +64,6 @@ CREATE TABLE Recommend (Rid INT PRIMARY KEY,RtitleVARCHAR(40) UNIQUE,Rcontent   
 > 插入表 
 
 ```
-INSERT  INTO  Recommend  (Rid, Rtitle, Rcontent) VALUES (1,'哈佛大学用这12张图，教育了十几亿人','很多人把感恩当成一种付出，其实感恩本身就是一种幸福。...');
+INSERT  INTO  Recommend  (Rid, Rtitle, Rcontent,Rts,Rpname,RseeNum,Rcomment) VALUES (1,'哈佛大学用这12张图，教育了十几亿人','很多人把感恩当成一种付出，其实感恩本身就是一种幸福。...','2019-07-05','duxue','54','[]');
 ```
 
