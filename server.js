@@ -1,39 +1,71 @@
-const Koa = require('koa');
-const Router = require('koa-router');
-const static = require('./static/');
-const path = require('path');
-const body = require('koa-better-body');
+const Koa=require('koa');
+const Router=require('koa-router');
+const static=require('./routes/static');
+const body=require('koa-better-body');
+const path=require('path');
+const session=require('koa-session');
+const fs=require('fs');
+const ejs=require('koa-ejs');
+const config=require('./config');
 
-let server = new Koa();
+let server=new Koa();
+server.listen(config.PORT);
+console.log(`server running at ${config.PORT}`);
+
 //中间件
 server.use(body({
-	uploadDir:path.resolve(__dirname,'static/upload')
-}))
+  uploadDir: config.UPLOAD_DIR
+}));
+
 
 //数据库
-server.context.db = require('./lib/database')
-server.listen (8080);
+server.context.db=require('./lib/database');
+server.context.config=config;
 
-// //统一处理
-// router.use(async (ctx, next)=>{
-// 	try{
-// 		await next()
-// 	}catch(e){
-// 		ctx.state = 500;
-// 		ctx.body = 'Internet server error'
-// 	}
-// })
+//渲染
+ejs(server, {
+  root: path.resolve(__dirname, 'template'),
+  layout: false,
+  viewExt: 'ejs',
+  cache: false,
+  debug: false
+});
 
-server.use(async ctx =>{
-	let data = await ctx.db.query("SELECT * FROM Recommend;");
-	ctx.body = data;
-})
+// server.use(async (ctx, next)=>{
+//   let {HTTP_ROOT}=ctx.config;
+
+//   try{
+//     await next();
+
+//     if(!ctx.body){
+//       await ctx.render('www/404', {
+//         HTTP_ROOT
+//       });
+//     }
+//   }catch(e){
+//     await ctx.render('www/404', {
+//       HTTP_ROOT
+//     });
+//   }
+// });
 
 //路由和static
-let router = new Router();
-static(router)
-router.use('/',require('./routes/www'))
-router.use('/admin',require('./routes/admin'))
+let router=new Router();
+
+//统一处理
+/*router.use(async (ctx, next)=>{
+  try{
+    await next();
+  }catch(e){
+    ctx.throw(500, 'Internal Server Error');
+
+    console.log(e);
+  }
+});*/
 
 
-server.use(router.routes())
+router.use('/admin', require('./routes/admin'));
+router.use('/', require('./routes/www'));
+static(router);
+
+server.use(router.routes());
