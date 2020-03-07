@@ -7,6 +7,7 @@ const session=require('koa-session');
 const fs=require('fs');
 const ejs=require('koa-ejs');
 const config=require('./config');
+const app = require('./routes/app')
 
 let server=new Koa();
 server.listen(config.PORT);
@@ -64,8 +65,12 @@ let router=new Router();
 });*/
 
 
-router.use('/admin', require('./routes/admin'));
-router.use('/', require('./routes/www'));
+router.get('/',async ctx=>{
+  let data = await ctx.db.query("SELECT * FROM Grow;")
+  ctx.body = data
+})
+
+app(router);
 static(router);
 
 server.use(router.routes());

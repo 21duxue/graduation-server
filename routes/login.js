@@ -6,7 +6,7 @@ const Router=require('koa-router');
 let router=new Router();
 
 //
-router.get('/login', async ctx=>{
+router.get('/', async ctx=>{
   await ctx.render('index', {
     HTTP_ROOT: ctx.config.HTTP_ROOT,
     errmsg: ctx.query.errmsg
