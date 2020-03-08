@@ -5,14 +5,14 @@ let router=new Router();
 
 router.get('/', async ctx=>{
   db.query("SELECT * FROM Grow;").then(res=>{
-    ctx.body = res
+    console.log(res)
+    ctx.render('grow', {
+      HTTP_ROOT: ctx.config.HTTP_ROOT,
+      errmsg: ctx.query.errmsg,
+      obj:res
+    });
   })
-  //   ctx.render('grow', {
-  //     HTTP_ROOT: ctx.config.HTTP_ROOT,
-  //     errmsg: ctx.query.errmsg,
-  //     // obj:res
-  //   });
-  // });
+    
 });
 
 module.exports=router.routes();
