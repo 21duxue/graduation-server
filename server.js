@@ -65,10 +65,10 @@ let router=new Router();
 });*/
 
 
-router.get('/',async ctx=>{
-  let data = await ctx.db.query("SELECT * FROM Grow;")
-  ctx.body = data
-})
+// router.get('/',async ctx=>{
+//   let data = await ctx.db.query("SELECT * FROM Grow;")
+//   ctx.body = data
+// })
 
 app(router);
 static(router);
