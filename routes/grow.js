@@ -6,7 +6,7 @@ router.get('/', async ctx=>{
   await ctx.render('grow', {
       HTTP_ROOT: ctx.config.HTTP_ROOT,
       errmsg: ctx.query.errmsg,
-      // obj:res
+      obj:data
     });
   })
 module.exports=router.routes();
