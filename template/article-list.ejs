@@ -64,7 +64,7 @@
         			<td><%= (obj[item].aprivate==1?'公开':'私密') %></td>
         			<td class="td-status"><%= (obj[item].astatus==1?'已启用':'已停用') %></td>
         			<td class="td-manage">
-        				<a style="text-decoration:none" onClick="<%= obj[item].astatus==1?'admin_stop(this)':'admin_start(this)' %>" href="javascript:;" title="<%= (obj[item].astatus==1?'停用':'启用') %>">
+        				<a style="text-decoration:none" onClick=`<%= obj[item].astatus==1?'admin_stop(this)':'admin_start(this)' %>` href="javascript:;" title="<%= (obj[item].astatus==1?'停用':'启用') %>">
         					<% if(obj[item].astatus == 1){ %>
         						<i class="Hui-iconfont">&#xe631;</i>
         					<% } else {%>
