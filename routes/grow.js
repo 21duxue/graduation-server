@@ -1,13 +1,14 @@
 const Router=require('koa-router');
+const db=require('../lib/database');
 
 let router=new Router();
 
 router.get('/', async ctx=>{
-    console.log(ctx.db.query("SELECT * FROM Grow;"))
-    await  ctx.render('grow', {
+    console.log(db.query("SELECT * FROM Grow;"))
+    await ctx.render('grow', {
     HTTP_ROOT: ctx.config.HTTP_ROOT,
     errmsg: ctx.query.errmsg,
-    obj:ctx.db.query("SELECT * FROM Grow;")
+    obj:db.query("SELECT * FROM Grow;")
   });
 });
 
