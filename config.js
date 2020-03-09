@@ -12,5 +12,5 @@ module.exports = {
   HTTP_ROOT: 'http://localhost:8080',
   //HTTP_ROOT: 'https://www.aaa.com',
 
-  UPLOAD_DIR: path.resolve(__dirname, './static/upload'),
+  UPLOAD_DIR: path.resolve(__dirname, './public/upload'),
 }

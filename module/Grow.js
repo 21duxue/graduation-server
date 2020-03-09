@@ -3,7 +3,7 @@ const db = require('../lib/database');
 var Grow = function(){};
 
 Grow.prototype.getAll = function(cb){
-  const sql = 'select Grow.aid,atitle,acontent,acomment,aimage,atime,GROUP_CONCAT(acloumn),aprivate,astatus from Grow,GrowColumn where Grow.aid = GrowColumn.aid group by Grow.aid';
+  const sql = 'select Grow.Gid,Gtitle,Rcontent,Gimg,Gts from Grow;'
   db.query(sql,(err,result)=>{
     if(err){
       cb(true);
@@ -14,9 +14,9 @@ Grow.prototype.getAll = function(cb){
   })
 }
 
-Grow.prototype.selectGrow = function(name,cb){
-  const sql = 'select Grow.aid,atitle,acontent,acomment,aimage,atime,GROUP_CONCAT(acloumn),aprivate,astatus from Grow,GrowColumn where Grow.aid = GrowColumn.aid and atitle like ? group by Grow.aid';
-  db.query(sql,['%' + name + '%'],(err,result)=>{
+Grow.prototype.selectGrow = function(id,cb){
+  const sql = 'select Grow.Gid,Gtitle,Rcontent,Gts,Gimg from Grow where Grow.Gts = '+id;
+  db.query(sql,(err,result)=>{
     if(err){
       cb(true);
       return;
@@ -38,7 +38,7 @@ Grow.prototype.addColumn = function(id,column,cb){
 
 Grow.prototype.addGrow = function(obj,cb){
   const sql = 'insert into Grow values(?,?,?,?,?,?,?,?,?)';
-  db.query(sql,[obj.aid,obj.atitle,obj.acontent,Date().slice(0,24),obj.acomment,obj.aimage,1,1,obj.uid],function(err,result){
+  db.query(sql,[obj.Gid,obj.Gtitle,obj.Rcontent,Date().slice(0,24),obj.Gimg,],function(err,result){
     if(err){
       cb(true);
       return;
@@ -59,7 +59,7 @@ Grow.prototype.updateItem = function(status,id,cb){
 }
 
 Grow.prototype.deleteItem = function(id,cb){
-    const sql = 'delete from Grow where aid = ?';
+    const sql = 'delete from Grow where Gid = ?';
     db.query(sql,[id],function(err,result){
       if(err){
         cb(true);
