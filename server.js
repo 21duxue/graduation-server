@@ -15,7 +15,8 @@ console.log(`server running at ${config.PORT}`);
 
 //中间件
 server.use(body({
-  uploadDir: config.UPLOAD_DIR
+  uploadDir: config.UPLOAD_DIR,
+  keepExtensions: 'true' //文件是否需要扩展名
 }));
 
 
