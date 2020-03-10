@@ -95,16 +95,6 @@ router.get('/get-list', async ctx=>{
   }
 })
 
-router.post('/', async ctx=>{
-  let data = ctx.request.fields;
-  console.log(data)
-    await ctx.render('article-list', {
-      HTTP_ROOT: ctx.config.HTTP_ROOT,
-      errmsg: ctx.query.errmsg,
-      obj:[]
-    });
-})
-
 
   
 module.exports=router.routes();

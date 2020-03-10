@@ -37,8 +37,8 @@ Grow.prototype.addColumn = function(id,column,cb){
 }
 
 Grow.prototype.addGrow = function(obj,cb){
-  const sql = 'insert into Grow values(?,?,?,?,?,?,?,?,?)';
-  db.query(sql,[obj.Gid,obj.Gtitle,obj.Rcontent,Date().slice(0,24),obj.Gimg,],function(err,result){
+  const sql = 'insert into Grow values(?,?,?,?,?)';
+  db.query(sql,[obj.Gid,obj.Gtitle,obj.Rcontent,Date().slice(0,24),obj.Gimg],function(err,result){
     if(err){
       cb(true);
       return;
