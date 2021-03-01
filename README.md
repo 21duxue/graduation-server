@@ -1,2 +1,2 @@
 # graduation-server
-毕设设计之后端
+实训项目之后端
